@@ -13,8 +13,8 @@
 
   <header class="header">
     <a href="#" class="logo">Teachinder</a>
-    <form class="search" action="#">
-      <input type="text" placeholder="Name, note or age to search">
+    <form class="search" id="search-form" action="#">
+      <input type="text" id="search-input" placeholder="Name, note or age to search">
       <button type="submit" class="btn btn-small">Search</button>
     </form>
   </header>
@@ -33,59 +33,50 @@
     <h2>Top Teachers</h2>
     <div class="filters">
       <div class="filter"><label for="age">Age</label>
-        <select id="age"><option>18-31</option><option>32-45</option></select></div>
-      <div class="filter"><label for="region">Region</label>
-        <select id="region"><option>Europe</option><option>Asia</option></select></div>
+        <select id="age">
+          <option value="">All</option>
+          <option value="18-31">18-31</option>
+          <option value="32-45">32-45</option>
+          <option value="46-60">46-60</option>
+          <option value="61-100">61+</option>
+        </select></div>
+      <div class="filter"><label for="country">Country</label>
+        <select id="country"><option value="">All</option></select></div>
       <div class="filter"><label for="sex">Sex</label>
-        <select id="sex"><option>Male</option><option>Female</option></select></div>
+        <select id="sex">
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select></div>
       <div class="filter"><input type="checkbox" id="photo"><label for="photo">Only with photo</label></div>
       <div class="filter"><input type="checkbox" id="fav"><label for="fav">Only favorites</label></div>
     </div>
+    <p id="filter-info" style="margin: -15px 0 25px; font-size: 15px; color: #a9a9a9;"></p>
 
-    <div class="teachers">
-      <a href="#info-popup" class="teacher"><img class="avatar" src="img/ihor.jpg" alt=""><h3>Ihor Tkachuk</h3><p class="spec">Chemistry</p><p class="country">Ukraine</p></a>
-      <a href="#info-popup" class="teacher"><img class="avatar" src="img/pragg.jpg" alt=""><h3>Pragg Rameshbabu</h3><p class="spec">Chess</p><p class="country">India</p></a>
-      <a href="#info-popup" class="teacher"><div class="star-wrap"><img class="avatar" src="img/floor.jpg" alt=""><span class="star">&#9733;</span></div><h3>Floor Jansen</h3><p class="spec">Vocal</p><p class="country">Denmark</p></a>
-      <a href="#info-popup" class="teacher"><img class="avatar" src="img/john.jpg" alt=""><h3>John Burke</h3><p class="spec">Computer Science</p><p class="country">Belgium</p></a>
-      <a href="#info-popup" class="teacher"><div class="star-wrap"><img class="avatar" src="img/ari.jpg" alt=""><span class="star">&#9733;</span></div><h3>Ari Tang</h3><p class="spec">Biology</p><p class="country">China</p></a>
-      <a href="#info-popup" class="teacher"><img class="avatar" src="img/rachel.jpg" alt=""><h3>Rachel Andrew</h3><p class="spec">Medicine</p><p class="country">UK</p></a>
-      <a href="#info-popup" class="teacher"><div class="avatar initials">A.M</div><h3>Anna Muzychuk</h3><p class="spec">Chess</p><p class="country">Belarus</p></a>
-      <a href="#info-popup" class="teacher"><div class="avatar initials">R.L</div><h3>Radoslaw Ljuboevic</h3><p class="spec">Physics</p><p class="country">Poland</p></a>
-    </div>
+    <div class="teachers" id="teachers"></div>
   </section>
 
   <section class="section" id="stats">
     <h2>Statistics</h2>
     <table class="stats">
-      <thead><tr><th>Name</th><th>Speciality</th><th>Age</th><th>Gender</th><th>Nationality</th></tr></thead>
-      <tbody>
-        <tr><td>Daisy Alexander</td><td>Chemistry</td><td>28</td><td>Female</td><td>Vietnam</td></tr>
-        <tr><td>Julia Bradley</td><td>Math</td><td>26</td><td>Female</td><td>USA</td></tr>
-        <tr><td>Rita Hart</td><td>Art</td><td>41</td><td>Female</td><td>Ireland</td></tr>
-        <tr><td>Jonathan Jacobs</td><td>Math</td><td>32</td><td>Male</td><td>England</td></tr>
-        <tr><td>Nathaniel White</td><td>Computer Science</td><td>37</td><td>Male</td><td>Austria</td></tr>
-        <tr><td>Frank Medina</td><td>English</td><td>43</td><td>Male</td><td>Italy</td></tr>
-        <tr><td>Ella Curtis</td><td>Chess</td><td>34</td><td>Female</td><td>USA</td></tr>
-        <tr><td>Claire Simmons</td><td>Art</td><td>38</td><td>Female</td><td>Netherlands</td></tr>
-        <tr><td>Benjamin Knight</td><td>Biology</td><td>44</td><td>Male</td><td>Scotland</td></tr>
-        <tr><td>Norma Rose</td><td>Statistics</td><td>36</td><td>Female</td><td>France</td></tr>
-      </tbody>
+      <thead><tr>
+        <th data-field="full_name">Name</th>
+        <th data-field="course">Speciality</th>
+        <th data-field="age">Age</th>
+        <th data-field="gender">Gender</th>
+        <th data-field="country">Nationality</th>
+      </tr></thead>
+      <tbody id="stats-body"></tbody>
     </table>
-    <div class="pager"><a href="#">1</a><a href="#">2</a><a href="#">3</a><span>...</span><a href="#">Last</a></div>
+    <div class="pager" id="pager"></div>
   </section>
 
   <section class="section" id="favorites">
     <h2>Favorites</h2>
     <div class="carousel">
-      <button class="arrow" aria-label="Previous">&#10094;</button>
-      <div class="teachers-row">
-        <a href="#info-popup" class="teacher"><img class="avatar" src="img/ihor.jpg" alt=""><h3>Ihor Tkachuk</h3><p class="country">Ukraine</p></a>
-        <a href="#info-popup" class="teacher"><div class="avatar initials">A.M</div><h3>Anna Makarevich</h3><p class="country">Belarus</p></a>
-        <a href="#info-popup" class="teacher"><img class="avatar" src="img/john.jpg" alt=""><h3>John Burke</h3><p class="country">Belgium</p></a>
-        <a href="#info-popup" class="teacher"><img class="avatar" src="img/ari.jpg" alt=""><h3>Ari Tang</h3><p class="country">China</p></a>
-        <a href="#info-popup" class="teacher"><img class="avatar" src="img/floor.jpg" alt=""><h3>Floor Jansen</h3><p class="country">Denmark</p></a>
-      </div>
-      <button class="arrow" aria-label="Next">&#10095;</button>
+      <button class="arrow" id="fav-prev" aria-label="Previous">&#10094;</button>
+      <div class="teachers-row" id="fav-row"></div>
+      <button class="arrow" id="fav-next" aria-label="Next">&#10095;</button>
     </div>
   </section>
 
@@ -141,18 +132,18 @@
     <div class="popup-head"><h2>Teacher Info</h2><a href="#" class="close">&#10005;</a></div>
     <div class="popup-body">
       <div class="info-top">
-        <img src="img/ihor-big.jpg" alt="">
+        <img id="info-photo" src="" alt="">
         <div class="info-text">
-          <span class="star-outline">&#9734;</span>
-          <h3>Ihor Tkachuk</h3>
-          <h4>Chemistry</h4>
-          <p>Kyiv, Ukraine</p>
-          <p>35, Male</p>
-          <p><a href="mailto:ihor_tkachuk@domain.com">ihor_tkachuk@domain.com</a></p>
-          <p>+380964993252</p>
+          <span class="star-outline" id="info-star">&#9734;</span>
+          <h3 id="info-name"></h3>
+          <h4 id="info-course"></h4>
+          <p id="info-place"></p>
+          <p id="info-age"></p>
+          <p><a id="info-email" href="#"></a></p>
+          <p id="info-phone"></p>
         </div>
       </div>
-      <p class="notes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem consectetur culpa cumque, distinctio dolor dolore dolorem doloremque ea explicabo facilis nam nesciunt nisi pariatur perspiciatis porro quis similique temporibus veniam veritatis? A ab ad, aliquam amet consequatur cupiditate debitis deserunt doloribus dolorum earum eius eos minus nostrum odit omnis perferendis...</p>
+      <p class="notes" id="info-note"></p>
       <details class="map-box">
         <summary>toggle map</summary>
         <iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=30.40,50.40,30.65,50.50" title="map"></iframe>
@@ -161,5 +152,6 @@
   </div>
 </div>
 
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
