@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teachinder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@webdatarocks/webdatarocks@1.4.23/webdatarocks.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <a href="#" class="logo">Teachinder</a>
+    <form class="search" id="search-form" action="#">
+      <input type="text" id="search-input" placeholder="Name, note or age to search" autocomplete="off">
+      <button type="submit" class="btn btn-small">Search</button>
+    </form>
+  </header>
+
+  <nav class="menu clearfix">
+    <ul class="menu-list">
+      <li><a href="#top">Teachers</a></li>
+      <li><a href="#stats">Statistics</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#teach_add_popup" class="btn">Add teacher</a>
+  </nav>
+
+  <section class="section" id="top">
+    <h2>Top Teachers</h2>
+    <div class="filters">
+      <div class="filter"><label for="age">Age</label>
+        <select id="age">
+          <option value="">All</option>
+          <option value="18-31">18-31</option>
+          <option value="32-45">32-45</option>
+          <option value="46-60">46-60</option>
+          <option value="61-100">61+</option>
+        </select></div>
+      <div class="filter"><label for="country">Country</label>
+        <select id="country"><option value="">All</option></select></div>
+      <div class="filter"><label for="sex">Sex</label>
+        <select id="sex">
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select></div>
+      <div class="filter"><input type="checkbox" id="photo"><label for="photo">Only with photo</label></div>
+      <div class="filter"><input type="checkbox" id="fav"><label for="fav">Only favorites</label></div>
+    </div>
+    <p id="filter-info" style="margin: -15px 0 25px; font-size: 15px; color: #a9a9a9;"></p>
+
+    <div class="teachers" id="teachers"></div>
+    <div class="more"><button type="button" class="btn" id="next-btn">Next</button></div>
+  </section>
+
+  <section class="section" id="stats">
+    <h2>Statistics</h2>
+    <p class="stats-info" id="stats-info"></p>
+
+    <!-- Завдання 2: кругові діаграми (Chart.js) -->
+    <div class="charts">
+      <div class="chart-box"><canvas id="chart-course"></canvas></div>
+      <div class="chart-box"><canvas id="chart-gender"></canvas></div>
+      <div class="chart-box"><canvas id="chart-country"></canvas></div>
+      <div class="chart-box"><canvas id="chart-age"></canvas></div>
+    </div>
+
+    <!-- Завдання 5: звіт (WebDataRocks) -->
+    <div class="report-head">
+      <h3>Report</h3>
+      <div class="report-switch">
+        <button type="button" class="btn btn-small active" id="report-countries">Report by countries</button>
+        <button type="button" class="btn btn-small" id="report-flat">All teachers (flat table)</button>
+      </div>
+    </div>
+    <div id="pivot"></div>
+  </section>
+
+  <section class="section" id="favorites">
+    <h2>Favorites</h2>
+    <div class="carousel">
+      <button class="arrow" id="fav-prev" aria-label="Previous">&#10094;</button>
+      <div class="teachers-row" id="fav-row"></div>
+      <button class="arrow" id="fav-next" aria-label="Next">&#10095;</button>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque facere, hic impedit itaque molestiae sit tempore? Ea in mollitia natus rerum voluptates. Ea ex excepturi facere tempora. Aliquid asperiores hic impedit iusto natus quaerat ratione sit? Culpa iusto optio voluptas voluptate. Enim eveniet fugit iure maiores molestiae, praesentium quia.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eligendi illum in inventore ipsum odio officiis omnis quisquam sed tempora?</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque esse expedita id iusto mollitia, odit sint ullam veritatis vero?</p>
+  </section>
+
+  <footer class="menu clearfix">
+    <ul class="menu-list">
+      <li><a href="#top">Teachers</a></li>
+      <li><a href="#stats">Statistics</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#teach_add_popup" class="btn">Add teacher</a>
+  </footer>
+</div>
+
+<!-- Popup 1: add teacher -->
+<div class="overlay" id="teach_add_popup">
+  <a href="#" class="overlay-close" aria-label="Close"></a>
+  <div class="popup popup-add">
+    <div class="popup-head"><h2>Add Teacher</h2><a href="#" class="close">&#10005;</a></div>
+    <form class="form" id="add-form" action="#" novalidate>
+      <label>Name<input type="text" id="add-name" placeholder="Enter name"></label>
+      <label>Speciality
+        <select id="add-course">
+          <option>Mathematics</option><option>Physics</option><option>English</option>
+          <option>Computer Science</option><option>Dancing</option><option>Chess</option>
+          <option>Biology</option><option>Chemistry</option><option>Law</option>
+          <option>Art</option><option>Medicine</option><option>Statistics</option>
+        </select></label>
+      <div class="row">
+        <label>Country<select id="add-country"></select></label>
+        <label>City<input type="text" id="add-city"></label>
+      </div>
+      <div class="row">
+        <label>Email<input type="email" id="add-email"></label>
+        <label>Phone<input type="tel" id="add-phone"></label>
+      </div>
+      <label class="half">Date of birth<input type="date" id="add-birth"></label>
+      <div class="inline">Sex
+        <label>Male <input type="radio" name="sex" value="Male" checked></label>
+        <label>Female <input type="radio" name="sex" value="Female"></label></div>
+      <div class="inline">Background color <input type="color" id="add-color" value="#000000"></div>
+      <label>Notes (optional)<textarea id="add-note" rows="6"></textarea></label>
+      <p class="form-error" id="add-error"></p>
+      <button type="submit" class="btn btn-wide">Add</button>
+    </form>
+  </div>
+</div>
+
+<!-- Popup 2: teacher info -->
+<div class="overlay" id="info-popup">
+  <a href="#" class="overlay-close" aria-label="Close"></a>
+  <div class="popup popup-info">
+    <div class="popup-head"><h2>Teacher Info</h2><a href="#" class="close">&#10005;</a></div>
+    <div class="popup-body">
+      <div class="info-top">
+        <img id="info-photo" src="" alt="">
+        <div class="info-text">
+          <span class="star-outline" id="info-star">&#9734;</span>
+          <h3 id="info-name"></h3>
+          <h4 id="info-course"></h4>
+          <p id="info-place"></p>
+          <p id="info-age"></p>
+          <p id="info-birthday"></p>
+          <p><a id="info-email" href="#"></a></p>
+          <p id="info-phone"></p>
+        </div>
+      </div>
+      <p class="notes" id="info-note"></p>
+      <details class="map-box" id="map-box">
+        <summary>toggle map</summary>
+        <div class="map" id="map"></div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<!-- сторонні бібліотеки (звичайні скрипти, щоб змінні L, Chart, _, dayjs, WebDataRocks були глобальними) -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.6.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.18.1/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.23/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webdatarocks/webdatarocks@1.4.23/webdatarocks.toolbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webdatarocks/webdatarocks@1.4.23/webdatarocks.js"></script>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
