@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teachinder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <a href="#" class="logo">Teachinder</a>
+    <form class="search" id="search-form" action="#">
+      <input type="text" id="search-input" placeholder="Name, note or age to search">
+      <button type="submit" class="btn btn-small">Search</button>
+    </form>
+  </header>
+
+  <nav class="menu clearfix">
+    <ul class="menu-list">
+      <li><a href="#top">Teachers</a></li>
+      <li><a href="#stats">Statistics</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#add-popup" class="btn">Add teacher</a>
+  </nav>
+
+  <section class="section" id="top">
+    <h2>Top Teachers</h2>
+    <div class="filters">
+      <div class="filter"><label for="age">Age</label>
+        <select id="age">
+          <option value="">All</option>
+          <option value="18-31">18-31</option>
+          <option value="32-45">32-45</option>
+          <option value="46-60">46-60</option>
+          <option value="61-100">61+</option>
+        </select></div>
+      <div class="filter"><label for="country">Country</label>
+        <select id="country"><option value="">All</option></select></div>
+      <div class="filter"><label for="sex">Sex</label>
+        <select id="sex">
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select></div>
+      <div class="filter"><input type="checkbox" id="photo"><label for="photo">Only with photo</label></div>
+      <div class="filter"><input type="checkbox" id="fav"><label for="fav">Only favorites</label></div>
+    </div>
+    <p id="filter-info" style="margin: -15px 0 25px; font-size: 15px; color: #a9a9a9;"></p>
+
+    <div class="teachers" id="teachers"></div>
+  </section>
+
+  <section class="section" id="stats">
+    <h2>Statistics</h2>
+    <table class="stats">
+      <thead><tr>
+        <th data-field="full_name">Name</th>
+        <th data-field="course">Speciality</th>
+        <th data-field="age">Age</th>
+        <th data-field="gender">Gender</th>
+        <th data-field="country">Nationality</th>
+      </tr></thead>
+      <tbody id="stats-body"></tbody>
+    </table>
+    <div class="pager" id="pager"></div>
+  </section>
+
+  <section class="section" id="favorites">
+    <h2>Favorites</h2>
+    <div class="carousel">
+      <button class="arrow" id="fav-prev" aria-label="Previous">&#10094;</button>
+      <div class="teachers-row" id="fav-row"></div>
+      <button class="arrow" id="fav-next" aria-label="Next">&#10095;</button>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque facere, hic impedit itaque molestiae sit tempore? Ea in mollitia natus rerum voluptates. Ea ex excepturi facere tempora. Aliquid asperiores hic impedit iusto natus quaerat ratione sit? Culpa iusto optio voluptas voluptate. Enim eveniet fugit iure maiores molestiae, praesentium quia.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eligendi illum in inventore ipsum odio officiis omnis quisquam sed tempora?</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque esse expedita id iusto mollitia, odit sint ullam veritatis vero?</p>
+  </section>
+
+  <footer class="menu clearfix">
+    <ul class="menu-list">
+      <li><a href="#top">Teachers</a></li>
+      <li><a href="#stats">Statistics</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#add-popup" class="btn">Add teacher</a>
+  </footer>
+</div>
+
+<!-- Popup 1: add teacher -->
+<div class="overlay" id="add-popup">
+  <a href="#" class="overlay-close" aria-label="Close"></a>
+  <div class="popup popup-add">
+    <div class="popup-head"><h2>Add Teacher</h2><a href="#" class="close">&#10005;</a></div>
+    <form class="form" action="#">
+      <label>Name<input type="text" placeholder="Enter name"></label>
+      <label>Speciality
+        <select><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option></select></label>
+      <div class="row">
+        <label>Country<select><option>Ukraine</option><option>Poland</option><option>Belgium</option></select></label>
+        <label>City<input type="text"></label>
+      </div>
+      <div class="row">
+        <label>Email<input type="email"></label>
+        <label>Phone<input type="tel"></label>
+      </div>
+      <label class="half">Date of birth<input type="date"></label>
+      <div class="inline">Sex
+        <label>Male <input type="radio" name="sex"></label>
+        <label>Female <input type="radio" name="sex"></label></div>
+      <div class="inline">Background color <input type="color" value="#000000"></div>
+      <label>Notes (optional)<textarea rows="6"></textarea></label>
+      <button type="submit" class="btn btn-wide">Add</button>
+    </form>
+  </div>
+</div>
+
+<!-- Popup 2: teacher info -->
+<div class="overlay" id="info-popup">
+  <a href="#" class="overlay-close" aria-label="Close"></a>
+  <div class="popup popup-info">
+    <div class="popup-head"><h2>Teacher Info</h2><a href="#" class="close">&#10005;</a></div>
+    <div class="popup-body">
+      <div class="info-top">
+        <img id="info-photo" src="" alt="">
+        <div class="info-text">
+          <span class="star-outline" id="info-star">&#9734;</span>
+          <h3 id="info-name"></h3>
+          <h4 id="info-course"></h4>
+          <p id="info-place"></p>
+          <p id="info-age"></p>
+          <p><a id="info-email" href="#"></a></p>
+          <p id="info-phone"></p>
+        </div>
+      </div>
+      <p class="notes" id="info-note"></p>
+      <details class="map-box">
+        <summary>toggle map</summary>
+        <iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=30.40,50.40,30.65,50.50" title="map"></iframe>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
