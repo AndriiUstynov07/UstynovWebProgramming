@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  color: #222;
+}
+
+button {
+  background: #1e88e5;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+.error {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+/* Сторінка логіна */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  background: white;
+  padding: 30px;
+  width: 340px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-form h2 {
+  text-align: center;
+  font-style: italic;
+}
+
+.login-form label {
+  display: block;
+  margin-top: 14px;
+  font-weight: bold;
+}
+
+.login-form input[type='text'],
+.login-form input[type='password'] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.login-form .remember {
+  font-weight: normal;
+}
+
+.login-form button {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Dashboard */
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.weather-card {
+  background: white;
+  flex: 1 1 190px;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+}
+
+.weather-card h3 {
+  margin: 0;
+  text-transform: capitalize;
+  color: #1e88e5;
+}
+
+.weather-card p {
+  margin: 6px 0;
+}
+
+.weather-date {
+  color: #777;
+  font-size: 14px;
+}
+
+.weather-icon {
+  font-size: 48px;
+}
+
+.weather-text {
+  font-weight: bold;
+}
+
+/* Лоадер */
+.loader-box {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 16px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #1e88e5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
